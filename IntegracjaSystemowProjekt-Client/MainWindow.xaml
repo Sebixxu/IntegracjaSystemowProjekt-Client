@@ -1,0 +1,65 @@
+﻿<Window x:Class="IntegracjaSystemowProjekt_Client.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:IntegracjaSystemowProjekt_Client"
+        mc:Ignorable="d"
+        Title="ISP - Sebastian Tomczak - Client" WindowStartupLocation="CenterScreen" ResizeMode="CanResize" Height="450" Width="800">
+    <ScrollViewer>
+        <StackPanel Orientation="Vertical">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="20"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                    <ColumnDefinition Width="150"></ColumnDefinition>
+                    <ColumnDefinition Width="75"></ColumnDefinition>
+                    <ColumnDefinition Width="50"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="5" IsReadOnly="True">Liczba laptopów producenta:</TextBox>
+                <ComboBox Grid.Row="1" Grid.Column="2" Margin="5" Name="ManufacturerNamesComboBox" ItemsSource="{Binding ManufacturerNames}" ></ComboBox>
+                <Button Grid.Row="1" Grid.Column="3" Margin="5" Click="GetLaptopCountByManufacturerFromServer">Załaduj</Button>
+                <TextBox Grid.Row="1" Grid.Column="4" Margin="5" IsReadOnly="True" Text="{Binding Path=LaptopCountByManufacturer, Mode=TwoWay}"></TextBox>
+
+                <TextBox Grid.Row="2" Grid.Column="1" Margin="5" IsReadOnly="True">Liczba laptopów o określonych proporcjach:</TextBox>
+                <ComboBox Grid.Row="2" Grid.Column="2" Margin="5" Name="AspectRatiosComboBox" ItemsSource="{Binding AspectRatios}" ></ComboBox>
+                <Button Grid.Row="2" Grid.Column="3" Margin="5" Click="GetLaptopCountByScreenAspectRatioFromServer">Załaduj</Button>
+                <TextBox Grid.Row="2" Grid.Column="4" Margin="5" IsReadOnly="True" Text="{Binding Path=LaptopCountByScreenAspectRatio, Mode=TwoWay}"></TextBox>
+
+                <TextBox Grid.Row="3" Grid.Column="1" Margin="5" IsReadOnly="True">Załaduj laptopy o określonej matrycy:</TextBox>
+                <ComboBox Grid.Row="3" Grid.Column="2" Margin="5" Name="ScreenTypesComboBox" ItemsSource="{Binding ScreenTypes}" ></ComboBox>
+                <Button Grid.Row="3" Grid.Column="3" Margin="5" Click="GetLaptopsByScreenTypeFromServer">Załaduj</Button>
+
+            </Grid>
+            <DataGrid ItemsSource="{Binding Laptops}" CanUserAddRows="False"
+              AutoGenerateColumns="False" CanUserResizeColumns="False" 
+              HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding ManufacturerName}" IsReadOnly="True" CanUserResize="False" Header="Producent"/>
+                    <DataGridTextColumn Binding="{Binding ScreenDiagonal}" IsReadOnly="True" CanUserResize="False" Header="Wielkość matrycy"/>
+                    <DataGridTextColumn Binding="{Binding Resolution}" IsReadOnly="True" CanUserResize="False" Header="Rozdzielczość" />
+                    <DataGridTextColumn Binding="{Binding ScreenSurfaceType}" IsReadOnly="True" CanUserResize="False" Header="Typ matrycy"/>
+                    <DataGridTextColumn Binding="{Binding IsTouchable}" IsReadOnly="True" CanUserResize="False" Header="Czy dotykowy?"/>
+                    <DataGridTextColumn Binding="{Binding ProcessorName}" IsReadOnly="True" CanUserResize="False" Header="Procesor"/>
+                    <DataGridTextColumn Binding="{Binding NumberOfPhysicalCores}" IsReadOnly="True" CanUserResize="False" Header="Liczba rdzeni fizycznych"/>
+                    <DataGridTextColumn Binding="{Binding Frequency}" IsReadOnly="True" CanUserResize="False" Header="Taktowanie"/>
+                    <DataGridTextColumn Binding="{Binding Ram}" IsReadOnly="True" CanUserResize="False" Header="RAM"/>
+                    <DataGridTextColumn Binding="{Binding DiskSize}" IsReadOnly="True" CanUserResize="False" Header="Pojemność dysku"/>
+                    <DataGridTextColumn Binding="{Binding DiskType}" IsReadOnly="True" CanUserResize="False" Header="Typ dysku"/>
+                    <DataGridTextColumn Binding="{Binding Gpu}" IsReadOnly="True" CanUserResize="False" Header="Karta graficzna"/>
+                    <DataGridTextColumn Binding="{Binding Vram}" IsReadOnly="True" CanUserResize="False" Header="Pamięć karty graficznej"/>
+                    <DataGridTextColumn Binding="{Binding Os}" IsReadOnly="True" CanUserResize="False" Header="System operacyjny"/>
+                    <DataGridTextColumn Binding="{Binding Drive}" IsReadOnly="True" CanUserResize="False" Header="Napęd optyczny"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+    </ScrollViewer>
+</Window>
